@@ -56,11 +56,9 @@ router.post("/", async (req, res) => {
 });
 
 function saveCover(book, coverEncoded) {
-  console.log(book, coverEncoded)
   if (coverEncoded == null) return
   const cover = JSON.parse(coverEncoded)
   if (cover != null && imageMimeTypes.includes(cover.type)) {
-    console.log('here')
     book.coverImage = new Buffer.from(cover.data, 'base64')
     book.coverImageType = cover.type
   }
