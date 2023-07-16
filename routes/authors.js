@@ -91,8 +91,7 @@ router.delete("/:id", async (req, res) => {
     const query = author.getFilter()
     await Author.deleteOne({_id: query._id});
     res.redirect('/authors');
-  } catch (err) {
-    console.log(err)
+  } catch {
     if (author == null) {
       res.redirect("/");
     } else {
