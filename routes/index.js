@@ -1,17 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const Book = require('../models/book')
+const express = require("express");
+const router = express.Router();
+const booksController = require("../controllers/authors");
 
-router.get('/', async (req, res) => {
-    let books
-    try {
-        books = await Book.find().sort({ createAt: 'desc'}).limit(10).exec()
-    } catch {
-        books = []
-    }
-    res.render('index', { books: books })
-})
+// GET / => Homepage
+router.get("/", booksController.getBooksHomePage);
 
-
-module.exports = router
-
+module.exports = router;
