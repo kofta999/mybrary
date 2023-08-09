@@ -13,5 +13,6 @@ It just supports CRUD operations on Authors/Books following MVC pattern atm.
 ## Tech Stack used:
 * **Runtime**: NodeJS
 * **Web Framework**: ExpressJS
+* **Templating Engine**: EJS
 * **Database**: MongoDB
 * **Auth**: PassportJS
