@@ -3,13 +3,25 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+// TODO:
+// Implement Authorization: like admin roles and such
+// and some users can be authors who can add books
+// adding authors and any books can only be for admins
+// users can only view books
+
+// Check if sessions are working correctly
+
 // Imports
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const indexRouter = require("./routes/index");
 const authorsRouter = require("./routes/authors");
 const booksRouter = require("./routes/books");
+const authRouter = require("./routes/auth");
 const bodyParser = require("body-parser");
+const passport = require("passport");
+const flash = require("express-flash");
+const session = require("express-session")
 const methodOverride = require("method-override");
 
 // App instance
@@ -22,7 +34,22 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static("public"));
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+app.use(flash());
 
 // Database connection
 const mongoose = require("mongoose");
@@ -35,6 +62,9 @@ db.once("open", () => console.log("Connected to mongoose"));
 app.use("/", indexRouter);
 app.use("/authors", authorsRouter);
 app.use("/books", booksRouter);
+app.use("/", authRouter);
 
 // App start
-app.listen(process.env.PORT || 4000, () => console.log("Connected on port 4000"));
+app.listen(process.env.PORT || 4000, () =>
+  console.log("Connected on port 4000")
+);

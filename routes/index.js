@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const booksController = require("../controllers/authors");
+const booksController = require("../controllers/books");
 
 // GET / => Homepage
 router.get("/", booksController.getBooksHomePage);
