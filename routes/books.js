@@ -49,4 +49,7 @@ router.delete(
   booksController.deleteBook
 );
 
+// POST /:id/add-to-fav => Add book to the user's favorites
+router.post("/:id/add-to-fav", authController.isLoggedIn, booksController.postAddBookToFav)
+
 module.exports = router;

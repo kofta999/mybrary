@@ -1,5 +1,6 @@
 const Book = require("../models/book");
 const Author = require("../models/author");
+const User = require("../models/user");
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 
 // Get all books
@@ -117,12 +118,31 @@ exports.deleteBook = async (req, res) => {
 exports.getBooksHomePage = async (req, res) => {
   let books;
   try {
-    books = await Book.find().sort({ createAt: 'desc'}).limit(10).exec();
+    books = await Book.find().sort({ createAt: "desc" }).limit(10).exec();
   } catch {
     books = [];
   }
-  res.render('index', { books: books });
-}
+  res.render("index", { books: books });
+};
+
+/**@type {import("express").RequestHandler} */
+exports.postAddBookToFav = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const bookId = req.params.id;
+    if (user.favoriteBooks.includes(bookId)) {
+      console.log("Book is already in favorites");
+    } else {
+      user.favoriteBooks.push(bookId);
+      await user.save();
+      console.log("Added book to favorites")
+    }
+    res.redirect(`/books/${bookId}`);
+  } catch (e) {
+    console.log(e);
+    res.redirect("/");
+  }
+};
 
 // Helper Functions
 

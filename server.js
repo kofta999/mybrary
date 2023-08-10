@@ -9,6 +9,9 @@ if (process.env.NODE_ENV !== "production") {
 // adding authors and any books can only be for admins
 // users can only view books
 
+// What makes users special from guests is the ability to favorite books,
+// mark them as read, wishlist, etc. Add that
+
 // Check if sessions are working correctly
 
 // Imports
@@ -21,7 +24,7 @@ const authRouter = require("./routes/auth");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const flash = require("express-flash");
-const session = require("express-session")
+const session = require("express-session");
 const methodOverride = require("method-override");
 
 // App instance

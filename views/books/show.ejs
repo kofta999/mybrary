@@ -1,11 +1,17 @@
 <h2 class="page-header"><%= book.title %></h2>
+<% if (locals.message) %> <%= locals.message %>
 <div class="book-details">
   <div>
     <img class="book-cover" src="<%= book.coverImagePath %>">
     <div class="book-details-btn-grid">
-      <% if (user && user.admin === true) { %>
+      <% if (user) { %>
+      <% if (user.admin === true) { %>
       <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
       <%- include('../partials/deleteForm.ejs', { url: `/books/${book.id}`}) %>
+      <% } %>
+      <form method="post" action="/books/<%= book.id %>/add-to-fav">
+        <button class="btn btn-primary" type="submit">Add to favorites</button>
+      </form>
       <% } %>
       <a class="btn btn-primary book-details-author-btn" href="/authors/<%= book.author.id %>">View Author</a>
     </div>

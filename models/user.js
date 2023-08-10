@@ -18,6 +18,11 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  favoriteBooks: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Book",
+    default: [],
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);
