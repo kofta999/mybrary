@@ -4,12 +4,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // TODO:
-// Implement Authorization: like admin roles and such
-// and some users can be authors who can add books
-// adding authors and any books can only be for admins
-// users can only view books
+// Implement Authorization:
+// some users can be authors who can add books
 
-// What makes users special from guests is the ability to favorite books,
+// What makes users special from guests is the ability to
 // mark them as read, wishlist, etc. Add that
 
 // Check if sessions are working correctly
