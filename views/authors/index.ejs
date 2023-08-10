@@ -20,8 +20,10 @@
 
   <div class="btn-row">
     <a class="btn btn-primary" href="/authors/<%= author.id %>">View</a>
+    <% if (user && user.admin === true) { %>
     <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">Edit</a>
     <%- include('../partials/deleteForm.ejs', { url: `/authors/${author.id}`}) %>
+    <% } %>
   </div>
 
 </div>

@@ -27,6 +27,11 @@ exports.isLoggedIn = (req, res, next) =>
 exports.isNotLoggedIn = (req, res, next) =>
   req.isAuthenticated() ? res.redirect("/") : next();
 
+exports.isAdmin = (req, res, next) => {
+  // FIXME: do something other than sendStatus
+  req.user.admin ? next() : res.sendStatus(401);
+};
+
 exports.logOut = (req, res) => {
   req.logout((err) => {
     if (err) res.redirect("/login");

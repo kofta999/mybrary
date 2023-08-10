@@ -1,11 +1,10 @@
 <h2 class="page-header"><%= author.name %></h2>
-
 <div class="btn-row">
+  <% if (user && user.admin === true) { %>
   <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">Edit</a>
-
-  <%- include('../partials/deleteForm.ejs', { url: `authors/${author.id}` }) %>
+  <%- include('../partials/deleteForm.ejs', { url: `/authors/${author.id}`}) %>
+  <% } %>
 </div>
-
 
 <% if (booksByAuthor.length > 0) { %>
 <h2 class="page-header">Books by Author</h2>

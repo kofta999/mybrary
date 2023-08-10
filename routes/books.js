@@ -1,26 +1,52 @@
 const express = require("express");
 const booksController = require("../controllers/books");
+const authController = require("../controllers/auth");
 const router = express.Router();
 
 // GET / => Get all books
 router.get("/", booksController.getAllBooks);
 
 // GET /new => New book form
-router.get("/new", booksController.getNewBookForm);
+router.get(
+  "/new",
+  authController.isLoggedIn,
+  authController.isAdmin,
+  booksController.getNewBookForm
+);
 
 // POST / => New book creation
-router.post("/", booksController.postNewBookForm);
+router.post(
+  "/",
+  authController.isLoggedIn,
+  authController.isAdmin,
+  booksController.postNewBookForm
+);
 
 // GET /:id => Show book
 router.get("/:id", booksController.getShowBook);
 
 // GET /:id/edit => Edit book form
-router.get("/:id/edit", booksController.getEditBookForm);
+router.get(
+  "/:id/edit",
+  authController.isLoggedIn,
+  authController.isAdmin,
+  booksController.getEditBookForm
+);
 
 // PUT /:id => Update book
-router.put("/:id", booksController.putEditBookForm);
+router.put(
+  "/:id",
+  authController.isLoggedIn,
+  authController.isAdmin,
+  booksController.putEditBookForm
+);
 
 // DELETE /:id => Delete book
-router.delete("/:id", booksController.deleteBook);
+router.delete(
+  "/:id",
+  authController.isLoggedIn,
+  authController.isAdmin,
+  booksController.deleteBook
+);
 
 module.exports = router;

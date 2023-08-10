@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
   hashedPassword: {
     type: String,
     minLength: 8
-  }
+  },
+  admin: {
+    type: Boolean,
+    default: false
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

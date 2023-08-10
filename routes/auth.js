@@ -11,13 +11,13 @@ router.post("/login", authController.postPassportLocalLogin);
 
 // Page Rendering
 
-router.get("/register", authController.isNotLoggedIn, authController.getRegisterPage)
+router.get(
+  "/register",
+  authController.isNotLoggedIn,
+  authController.getRegisterPage
+);
 
 router.get("/login", authController.isNotLoggedIn, authController.getLoginPage);
-
-// router.get("/profile", authController.isLoggedIn, (req, res) => {
-//   res.render("profile.ejs");
-// });
 
 // Etc Routes
 
