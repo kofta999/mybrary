@@ -22,6 +22,14 @@ router.post(
   booksController.postNewBookForm
 );
 
+// GET /favorites => Show Favorite Books
+
+router.get(
+  "/favorites",
+  authController.isLoggedIn,
+  booksController.getShowFavBooks
+);
+
 // GET /:id => Show book
 router.get("/:id", booksController.getShowBook);
 
@@ -31,6 +39,13 @@ router.get(
   authController.isLoggedIn,
   authController.isAdmin,
   booksController.getEditBookForm
+);
+
+// POST /:id/add-to-fav => Add book to the user's favorites
+router.post(
+  "/:id/add-to-fav",
+  authController.isLoggedIn,
+  booksController.postAddBookToFav
 );
 
 // PUT /:id => Update book
@@ -48,8 +63,5 @@ router.delete(
   authController.isAdmin,
   booksController.deleteBook
 );
-
-// POST /:id/add-to-fav => Add book to the user's favorites
-router.post("/:id/add-to-fav", authController.isLoggedIn, booksController.postAddBookToFav)
 
 module.exports = router;

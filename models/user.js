@@ -18,11 +18,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  favoriteBooks: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Book",
-    default: [],
-  }
+  favoriteBooks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }]
 });
 
 module.exports = mongoose.model("User", userSchema);

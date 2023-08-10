@@ -110,7 +110,7 @@ exports.deleteBook = async (req, res) => {
         errorMessage: "Could not remove book"
       });
     } else {
-      res.redirect("/ ");
+      res.redirect("/");
     }
   }
 };
@@ -126,6 +126,13 @@ exports.getBooksHomePage = async (req, res) => {
 };
 
 /**@type {import("express").RequestHandler} */
+exports.getShowFavBooks = async (req, res) => {
+  const user = await User.findById(req.user._id).populate({
+    path: "favoriteBooks"
+  });
+  res.render("books/favorites", { books: user.favoriteBooks });
+};
+
 exports.postAddBookToFav = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -135,7 +142,7 @@ exports.postAddBookToFav = async (req, res) => {
     } else {
       user.favoriteBooks.push(bookId);
       await user.save();
-      console.log("Added book to favorites")
+      console.log("Added book to favorites");
     }
     res.redirect(`/books/${bookId}`);
   } catch (e) {

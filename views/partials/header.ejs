@@ -1,18 +1,22 @@
 <header>
-    <nav class="header-nav">
+  <nav class="header-nav">
     <a class="header-title" href="/">Mybrary</a>
     <ul>
-        <li><a href="/authors">Authors</a></li>
-        <li><a href="/authors/new">Add author</a></li>
-        <li><a href="/books">Books</a></li>
-        <li><a href="/books/new">Add book</a></li>
-        <% if (user) { %>
-            <li>Welcome <%= user.name %></li>
-            <li><a href="/logout">Logout</a></li>
-        <% } else { %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register</a></li>
-        <% } %>
+      <li><a href="/authors">Authors</a></li>
+      <li><a href="/books">Books</a></li>
+      <% if (user) { %>
+      <li><a href="/books/favorites">Favorites</a></li>
+      <% if (user.admin) { %>
+      <li><a href="/authors/new">Add author</a></li>
+      <li><a href="/books/new">Add book</a></li>
+      <% } %>
+
+      <li>Welcome <%= user.name %></li>
+      <li><a href="/logout">Logout</a></li>
+      <% } else { %>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+      <% } %>
     </ul>
-    </nav>
+  </nav>
 </header>
