@@ -29,7 +29,7 @@ exports.isNotLoggedIn = (req, res, next) =>
 
 exports.isAdmin = (req, res, next) => {
   // FIXME: do something other than sendStatus
-  req.user.admin ? next() : res.sendStatus(401);
+  req.user.admin ? next() : res.status(401).render("auth/unauthorized");
 };
 
 exports.logOut = (req, res) => {

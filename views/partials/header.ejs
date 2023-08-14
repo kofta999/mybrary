@@ -5,14 +5,17 @@
       <li><a href="/authors">Authors</a></li>
       <li><a href="/books">Books</a></li>
       <% if (user) { %>
-      <li><a href="/books/favorites">Favorites</a></li>
-      <% if (user.admin) { %>
-      <li><a href="/authors/new">Add author</a></li>
-      <li><a href="/books/new">Add book</a></li>
-      <% } %>
-
-      <li>Welcome <%= user.name %></li>
-      <li><a href="/logout">Logout</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Welcome <%= user.name %></a>
+        <ol class="dropdown-menu">
+          <% if (user.admin) { %>
+          <li><a href="/authors/new">Add author</a></li>
+          <li><a href="/books/new">Add book</a></li>
+          <% } %>
+          <li><a href="/books/favorites">Favorites</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ol>
+      </li>
       <% } else { %>
       <li><a href="/login">Login</a></li>
       <li><a href="/register">Register</a></li>
