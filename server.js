@@ -5,7 +5,6 @@ if (process.env.NODE_ENV !== "production") {
 
 // TODO:
 // Implement Authorization:
-// some users can be authors who can add books
 
 // What makes users special from guests is the ability to
 // mark them as read, wishlist, etc. Add that
